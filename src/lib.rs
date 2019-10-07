@@ -26,8 +26,8 @@ use std::path::{Path,PathBuf};
 /// # Example
 /// 
 /// ```
-/// use term_basics_linux as tbl;
-/// println!("{:?}", tbl::get_home_string());
+/// extern crate simpleio as sio;
+/// println!("{:?}", sio::get_home_string());
 /// ```
 /// It returns the same as:
 /// ```
@@ -45,8 +45,8 @@ pub fn get_home_string() -> Option<String>{
 /// # Example
 /// 
 /// ```
-/// use term_basics_linux as tbl;
-/// println!("{:?}", tbl::get_home());
+/// extern crate simpleio as sio;
+/// println!("{:?}", sio::get_home());
 /// ```
 /// It returns the same as:
 /// ```
@@ -69,8 +69,8 @@ pub fn get_home() -> Option<PathBuf>{
 /// # Example
 /// 
 /// ```
-/// use term_basics_linux as tbl;
-/// println!("{:?}", tbl::get_config());
+/// extern crate simpleio as sio;
+/// println!("{:?}", sio::get_config());
 /// ```
 pub fn get_config() -> Option<PathBuf>{
     let home = get_home();
@@ -88,9 +88,9 @@ pub fn get_config() -> Option<PathBuf>{
 /// # Example
 /// 
 /// ```
-/// use term_basics_linux as tbl;
+/// extern crate simpleio as sio;
 /// //asuming home is set and will return a value
-/// tbl::println(tbl::file_exists(tbl::get_home().unwrap().as_path()));
+/// println!("{}", sio::file_exists(sio::get_home().unwrap().as_path()));
 /// ```
 pub fn file_exists(path: &Path) -> bool{
     let metadata = std::fs::metadata(path);
@@ -108,11 +108,11 @@ pub enum DirStatus { Exists, Created, Error, }
 /// # Example
 /// 
 /// ```
-/// use term_basics_linux as tbl;
-/// match tbl::create_dir(tbl::get_home().unwrap().as_path()){
-///     tbl::DirStatus::Exists => tbl::println("Home exists."),
-///     tbl::DirStatus::Created => tbl::println("Home created."),
-///     tbl::DirStatus::Error => tbl::println("Home could not be created."),
+/// extern crate simpleio as sio;
+/// match sio::create_dir(sio::get_home().unwrap().as_path()){
+///     sio::DirStatus::Exists => println!("Home exists."),
+///     sio::DirStatus::Created => println!("Home created."),
+///     sio::DirStatus::Error => println!("Home could not be created."),
 /// }
 /// ```
 pub fn create_dir(path: &Path) -> DirStatus{
