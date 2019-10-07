@@ -1,7 +1,17 @@
 [package]
 name = "simpleio"
 version = "0.1.0"
-authors = ["Cody Bloemhard <cblmhrd@live.nl>"]
+authors = ["Cody Bloemhard <codybloemhard@gmail.com>"]
 edition = "2018"
+description = "A simple crate for file io that i use in my personal projects."
+license = "GPL3"
+readme = "README.md"
+repository = "https://github.com/ocdy1001/simpleio"
+keywords = ["file","io"]
+categories = ["io"]
+
+[lib]
+name = "simpleio"
+path = "src/lib.rs"
 
 [dependencies]
