@@ -108,7 +108,7 @@ pub fn read_file_into_buffer(file_path: &Path) -> Result<Vec<u8>, std::io::Error
 }
 
 /// Reads file to the end into String
-pub fn read_file_into_string(file_path: &str) -> Result<String, std::io::Error>{
+pub fn read_file_into_string(file_path: &Path) -> Result<String, std::io::Error>{
     let mut string = String::new();
     let mut file = File::open(file_path)?;
     file.read_to_string(&mut string)?;
