@@ -1,10 +1,10 @@
-use std::env;
-use std::path::{ Path, PathBuf};
-use std::fs::File;
-use std::io::Read;
-use std::env::VarError;
-use std::io;
-use std::io::BufRead;
+use std::{
+    env,
+    fs::File,
+    env::VarError,
+    path::{ Path, PathBuf },
+    io::{ self, Read, BufRead },
+};
 
 /// Returns the home directory of the user as a String.
 ///
