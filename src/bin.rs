@@ -5,6 +5,7 @@ pub fn main(){
     test_get_home();
     test_file_exist();
     test_get_config();
+    test_read_lines();
 }
 
 fn test_get_home_string(){
@@ -31,3 +32,4 @@ fn test_create_dir(){
 fn test_get_config(){
     println!("{:?}", sio::get_config());
 }
+

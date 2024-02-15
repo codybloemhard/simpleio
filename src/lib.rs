@@ -3,6 +3,8 @@ use std::path::{ Path, PathBuf};
 use std::fs::File;
 use std::io::Read;
 use std::env::VarError;
+use std::io;
+use std::io::BufRead;
 
 /// Returns the home directory of the user as a String.
 ///
@@ -99,20 +101,45 @@ pub fn create_dir(path: &Path) -> DirStatus{
     }
 }
 
-/// Reads file to the end into Vec<u8>
-pub fn read_file_into_buffer(file_path: &Path) -> Result<Vec<u8>, std::io::Error>{
+/// Reads file to the end into Vec<u8>.
+pub fn read_file_into_buffer<P>(file_path: P) -> Result<Vec<u8>, std::io::Error>
+    where P: AsRef<Path>
+{
     let mut buffer = Vec::new();
     let mut file = File::open(file_path)?;
     file.read_to_end(&mut buffer)?;
     Ok(buffer)
 }
 
-/// Reads file to the end into String
-pub fn read_file_into_string(file_path: &Path) -> Result<String, std::io::Error>{
+/// Reads file to the end into String.
+pub fn read_file_into_string<P>(file_path: P) -> Result<String, std::io::Error>
+    where P: AsRef<Path>
+{
     let mut string = String::new();
     let mut file = File::open(file_path)?;
     file.read_to_string(&mut string)?;
     Ok(string)
+}
+
+/// Reads lines from file. Returns Lines iterator.
+pub fn read_lines_raw<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+    where P: AsRef<Path>
+{
+    let file = File::open(filename)?;
+    Ok(io::BufReader::new(file).lines())
+}
+
+/// Reads lines from file. Returns lines in vector.
+pub fn read_lines<P>(filename: P) -> Vec<String>
+    where P: AsRef<Path>
+{
+    let mut res = Vec::new();
+    if let Ok(ls) = read_lines_raw(filename) {
+        for l in ls.map_while(Result::ok) {
+            res.push(l);
+        }
+    }
+    res
 }
 
 #[cfg(test)]
