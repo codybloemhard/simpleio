@@ -1,6 +1,6 @@
 [package]
 name = "simpleio"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Cody Bloemhard <codybloemhard@gmail.com>"]
 edition = "2021"
 description = "A simple crate for file io that i use in my personal projects."
